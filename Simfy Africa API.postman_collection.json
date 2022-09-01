@@ -1,0 +1,466 @@
+{
+	"info": {
+		"_postman_id": "9d45ae25-225c-42b9-8868-5c40eeaf1ea9",
+		"name": "Simfy Africa API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1229618"
+	},
+	"item": [
+		{
+			"name": "Track",
+			"item": [
+				{
+					"name": "track",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/track",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"track"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "track by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/track/5",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"track",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "track new",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New Track Added\",\r\n    \"album\": \"Single\",\r\n    \"artist\": \"New Artist\",\r\n    \"duration\": 315,\r\n    \"artworkUrl\": \"https://i.ytimg.com/vi/421w1j87fEM/default.jpg\",\r\n    \"audioUrl\": \"https://music.youtube.com/watch?v=421w1j87fEM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/track",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"track"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "track update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Update track name\",\r\n    \"album\": \"Single\",\r\n    \"artist\": \"Burna Boy\",\r\n    \"duration\": 315,\r\n    \"artworkUrl\": \"https://i.ytimg.com/vi/421w1j87fEM/default.jpg\",\r\n    \"audioUrl\": \"https://music.youtube.com/watch?v=421w1j87fEM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/track/5",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"track",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "track delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The New Track\",\r\n    \"album\": \"The album of the new track\",\r\n    \"artist\": \"The artist of the new track\",\r\n    \"duration\": 505,\r\n    \"artworkUrl\": \"https://i.ytimg.com/vi/421w1j87fEM/default.jpg\",\r\n    \"audioUrl\": \"https://music.youtube.com/watch?v=421w1j87fEM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/track/5",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"track",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "playlist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/playlist",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"playlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playlist by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/playlist/4",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"playlist",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playlist new",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The New Playlist\",\r\n    \"creator\": \"The playlist creator\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/playlist",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"playlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playlist add track",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playlistId\": 4,\r\n    \"trackId\": 2\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/playlist/4/add-track",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"playlist",
+								"4",
+								"add-track"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playlist delete track",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playlistId\": 4,\r\n    \"trackId\": 1\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/playlist/4/remove-track",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"playlist",
+								"4",
+								"remove-track"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playlist update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The Renamed Playlist 3\",\r\n    \"creator\": \"The playlist creator renamed 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/playlist/4",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"playlist",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playlist delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The New Track\",\r\n    \"album\": \"The album of the new track\",\r\n    \"artist\": \"The artist of the new track\",\r\n    \"duration\": 505,\r\n    \"artworkUrl\": \"https://i.ytimg.com/vi/421w1j87fEM/default.jpg\",\r\n    \"audioUrl\": \"https://music.youtube.com/watch?v=421w1j87fEM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/playlist/4",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"playlist",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Gru\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/auth/login",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "hostname",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": "{{hostname}}:{{port}}",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refreshToken",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
