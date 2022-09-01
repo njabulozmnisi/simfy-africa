@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:alpine 
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_NAME}
+    # volumes:
+    #   - ./data/pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  
+  cache:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    # volumes:
+    #   - ./data/redis:/data
+
+  api:
+    build: .
+    depends_on:
+      - db
+      - cache
+    ports:
+      - "8080:8080" 
+    

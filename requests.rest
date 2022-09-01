@@ -1,0 +1,46 @@
+@hostname = localhost
+@port = 8080
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+# @name login
+POST http://{{host}}/auth/login
+Content-Type: {{contentType}}
+
+{
+    "username": "Gru"
+}
+
+###
+
+@accessToken = {{login.response.body.accessToken}}
+@refreshToken = {{login.response.body.refreshToken}}
+
+# @name refreshToken
+POST http://{{host}}/auth/refreshToken
+Content-Type: {{contentType}}
+
+{
+    "refreshToken": "{{refreshToken}}" 
+}
+
+###
+
+GET http://{{host}}/track
+Authorization: Bearer {{accessToken}}
+###
+
+GET http://{{host}}/track/20
+Authorization: Bearer {{accessToken}}
+
+###
+
+GET http://{{host}}/playlist
+Authorization: Bearer {{accessToken}}
+
+###
+
+GET http://{{host}}/playlist/4
+Authorization: Bearer {{accessToken}}
+
+###
