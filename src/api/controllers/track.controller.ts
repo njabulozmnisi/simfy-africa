@@ -3,7 +3,7 @@ import logger from "../../lib/logger";
 import { TrackInput } from "../../database/models/track";
 import * as trackService from "../../database/services/track.service";
 import { HttpStatusCode } from "../../lib/httpStatusCodes";
-import { getCacheKey, setCache } from "../middleware/cache";
+import { deleteFromCache, getCacheKey, setCache } from "../middleware/cache";
 
 export const getAll = async (req: Request, res: Response) => {
   const data = await trackService.getAll();
@@ -64,6 +64,9 @@ export const update = async (req: Request, res: Response) => {
     return res.sendStatus(HttpStatusCode.BAD_REQUEST);
   }
 
+  const { cacheKey } = getCacheKey(req);
+  setCache(cacheKey, data);
+
   res.status(HttpStatusCode.OK).send({ success: true });
 };
 
@@ -79,6 +82,9 @@ export const remove = async (req: Request, res: Response) => {
   if (!data) {
     return res.sendStatus(HttpStatusCode.BAD_REQUEST);
   }
+
+  const { cacheKey } = getCacheKey(req);
+  deleteFromCache(cacheKey, data);
 
   res.status(HttpStatusCode.OK).send({ success: true });
 };

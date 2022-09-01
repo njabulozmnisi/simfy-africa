@@ -34,5 +34,9 @@ app.listen(PORT, () => {
   logger.info(`application listening at http://localhost:${PORT}`);
 });
 
+process.on('uncaughtException', function (err) {
+  logger.error(err);
+})
+
 sequelizeContextInit();
 redisInit();

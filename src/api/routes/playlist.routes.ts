@@ -12,9 +12,9 @@ router.get('/:id', controller.get)
 
 router.post('/', controller.create)
 
-router.post('/add-track', controller.addTrack)
+router.post('/:id/add-track', controller.addTrack)
 
-router.delete('/remove-track', controller.removeTrack)
+router.delete('/:id/remove-track', controller.removeTrack)
 
 router.put('/:id', controller.update)
 

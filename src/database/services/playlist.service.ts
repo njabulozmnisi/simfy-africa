@@ -3,6 +3,7 @@ import { PlaylistTracksInput } from "../models/playlistTrack";
 import Track from "../models/track";
 import logger from "../../lib/logger";
 import PlaylistTracks from "../models/playlistTrack";
+import { Op } from "sequelize";
 
 export const getAll = async (): Promise<PlaylistOuput[]> => {
   return Playlist.findAll({
@@ -62,6 +63,8 @@ export const removeTrackFromPlaylist = async (
     },
   });
 
+  logger.info({ deletedPlaylistItemCount })
+
   return !!deletedPlaylistItemCount;
 };
 
@@ -78,4 +81,15 @@ export const deleteById = async (id: number): Promise<boolean> => {
   ]);
 
   return !!deletedPlaylistTrackCount;
+};
+
+export const playlistTrakExists = (payload: PlaylistTracksInput) => {
+  return PlaylistTracks.findAndCountAll({
+    where: {
+      [Op.and]: [
+        { playlistId: payload.playlistId },
+        { trackId: payload.trackId },
+      ],
+    },
+  });
 };

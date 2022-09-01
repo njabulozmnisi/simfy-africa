@@ -12,7 +12,9 @@ let client: RedisClientType;
 
 export const redisInit = () => {
   try {
-    client = redis.createClient({url: `redis://${process.env.CACHE_HOST}:${process.env.CACHE_PORT}`});
+    client = redis.createClient({
+      url: `redis://${process.env.CACHE_HOST}:${process.env.CACHE_PORT}`,
+    });
     client.connect();
   } catch (err) {
     logger.error(err);
@@ -26,27 +28,32 @@ export const checkCache = async (
 ) => {
   const { id, method, cacheKey } = getCacheKey(req);
 
-  if (method !== "GET" && !id) {
-    next();
-  }
+  if (method === "GET" && !!id) {
+    try {
+      const data = await client.get(cacheKey);
 
-  try {
-    const data = await client.get(cacheKey);
-
-    if (data) {
-      res.send(JSON.parse(data));
-      logger.info(`Retrieved from cache ${cacheKey}`);
-    } else {
-      next();
+      if (data) {
+        logger.info(`Retrieved from cache ${cacheKey}`);
+        return res.send(JSON.parse(data));
+      } else {
+        next();
+      }
+    } catch (error) {
+      logger.error({ cacheKey: cacheKey, error });
     }
-  } catch (error) {
-    logger.error({ cacheKey: cacheKey, error });
+  } else {
+    next();
   }
 };
 
 export const setCache = async (key: string, data: any) => {
   await client.setEx(key, DEFAULT_EXPIRATION, JSON.stringify(data));
   logger.info(`Caching new key ${key}`);
+};
+
+export const deleteFromCache = async (key: string, data: any) => {
+  await client.del(key);
+  logger.info(`Caching delete key ${key}`);
 };
 
 export const getCacheKey = (request: Request) => {

@@ -30,9 +30,21 @@ GET http://{{host}}/track
 Authorization: Bearer {{accessToken}}
 ###
 
-GET http://{{host}}/track/20
+GET http://{{host}}/track
 Authorization: Bearer {{accessToken}}
 
+###
+POST http://{{host}}/track
+Authorization: Bearer {{accessToken}}
+Content-Type: {{contentType}}
+{
+    "name": "The New Track",
+    "album": "The album of the new track",
+    "artist": "The artist of the new track",
+    "duration": 505,
+    "artworkUrl": "https://i.ytimg.com/vi/421w1j87fEM/default.jpg",
+    "audioUrl": "https://music.youtube.com/watch?v=421w1j87fEM"
+}
 ###
 
 GET http://{{host}}/playlist
